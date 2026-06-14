@@ -1,11 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. SMOOTH ANIMATION FOR HERO SLIDER ---
+    // --- 1. MOBILE RESPONSIVE DRAWER OVERLAY CONTROL ---
+    const menuToggle = document.getElementById('mobile-menu-btn');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+            const toggleIcon = menuToggle.querySelector('i');
+            
+            // Swap icon appearances based on drawer status
+            if (navMenu.classList.contains('open')) {
+                toggleIcon.className = "fa-solid fa-xmark";
+            } else {
+                toggleIcon.className = "fa-solid fa-bars";
+            }
+        });
+    }
+
+    // Dismiss drawer upon active menu selections
+    const navigationLinks = document.querySelectorAll('.nav-links a');
+    navigationLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navMenu && navMenu.classList.contains('open')) {
+                navMenu.classList.remove('open');
+                menuToggle.querySelector('i').className = "fa-solid fa-bars";
+            }
+        });
+    });
+
+
+    // --- 2. HERO SLIDER LOGIC & TRANSLATIONS ---
     const indicators = document.querySelectorAll('.indicator');
     const slides = document.querySelectorAll('.slide');
     let currentSlideIndex = 0;
 
-    function changeSlide(index) {
+    function activateSlide(index) {
         indicators.forEach(ind => ind.classList.remove('active'));
         slides.forEach(slide => slide.classList.remove('active'));
 
@@ -15,64 +45,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     indicators.forEach((indicator, idx) => {
-        indicator.addEventListener('click', () => {
-            changeSlide(idx);
-        });
+        indicator.addEventListener('click', () => activateSlide(idx));
     });
 
-    // Auto Advance Slider every 7 seconds
+    // Carousel loop cycle intervals
     setInterval(() => {
         let nextIndex = (currentSlideIndex + 1) % indicators.length;
-        changeSlide(nextIndex);
-    }, 7000);
+        activateSlide(nextIndex);
+    }, 8000);
 
 
-    // --- 2. INTERACTIVE MEDIA CATEGORY FILTERING ---
+    // --- 3. ON-DEMAND LIVE FILTERING COMPONENT ---
     const filterButtons = document.querySelectorAll('.filter-btn');
     const mediaCards = document.querySelectorAll('.media-card');
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Update Active class
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach(button => button.classList.remove('active'));
+            btn.classList.add('active');
 
-            const filterValue = button.getAttribute('data-filter');
+            const selection = btn.getAttribute('data-filter');
 
             mediaCards.forEach(card => {
-                const categories = card.getAttribute('data-category');
+                const targets = card.getAttribute('data-category');
                 
-                if (filterValue === 'all' || categories.includes(filterValue)) {
+                if (selection === 'all' || targets.includes(selection)) {
                     card.style.display = 'block';
-                    // Smooth fade-in effect via JS
                     setTimeout(() => {
                         card.style.opacity = '1';
                         card.style.transform = 'scale(1)';
                     }, 50);
                 } else {
                     card.style.opacity = '0';
-                    card.style.transform = 'scale(0.95)';
+                    card.style.transform = 'scale(0.96)';
                     setTimeout(() => {
                         card.style.display = 'none';
-                    }, 300); // match css transition duration
+                    }, 300);
                 }
             });
         });
     });
 
 
-    // --- 3. LIVE SEARCH FILTER ---
-    const searchInput = document.querySelector('.search-bar input');
-    
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase().trim();
+    // --- 4. DATA CATALOG QUANTITY LIVE FILTER ---
+    const inputField = document.querySelector('.search-bar input');
+
+    if (inputField) {
+        inputField.addEventListener('input', (event) => {
+            const currentSearchQuery = event.target.value.toLowerCase().trim();
 
             mediaCards.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const meta = card.querySelector('.meta').textContent.toLowerCase();
+                const headingText = card.querySelector('h3').textContent.toLowerCase();
+                const categoricalMeta = card.querySelector('.meta').textContent.toLowerCase();
 
-                if (title.includes(searchTerm) || meta.includes(searchTerm)) {
+                if (headingText.includes(currentSearchQuery) || categoricalMeta.includes(currentSearchQuery)) {
                     card.style.display = 'block';
                     card.style.opacity = '1';
                 } else {
