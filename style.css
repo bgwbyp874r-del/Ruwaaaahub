@@ -1,4 +1,4 @@
-/* --- RESET & VARIABLES --- */
+/* --- GLOBAL SYSTEM CONFIGURATION & CONFIGS --- */
 * {
     margin: 0;
     padding: 0;
@@ -28,7 +28,7 @@ a {
     text-decoration: none;
 }
 
-/* --- NAVIGATION BAR --- */
+/* --- NAVIGATION DESKTOP BAR & LAYOUT --- */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -39,7 +39,11 @@ a {
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.85), transparent);
+}
+
+.menu-toggle {
+    display: none; /* Controlled explicitly via @media queries on mobile devices */
 }
 
 .nav-links a {
@@ -67,7 +71,7 @@ a {
     font-size: 1.1rem;
 }
 
-/* --- BUTTONS --- */
+/* --- ACTION UI ELEMENTS --- */
 .btn {
     display: inline-block;
     padding: 10px 24px;
@@ -92,6 +96,7 @@ a {
 .btn-danger {
     background-color: var(--accent-red);
     color: #fff;
+    border: none;
 }
 
 .btn-danger:hover {
@@ -99,10 +104,17 @@ a {
     transform: translateY(-2px);
 }
 
-/* --- HERO SLIDER --- */
+.btn-sm {
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    background-color: var(--accent-red);
+    border-radius: 3px;
+}
+
+/* --- CINEMATIC HERO SLIDER COMPONENT --- */
 .hero-slider {
     position: relative;
-    height: 90vh;
+    height: 95vh;
     width: 100%;
     overflow: hidden;
 }
@@ -114,7 +126,7 @@ a {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center;
+    background-position: center top;
     display: flex;
     align-items: center;
     padding-left: 6%;
@@ -178,7 +190,7 @@ a {
     color: var(--accent-red);
 }
 
-/* Slider Controls */
+/* Slider Pagination Setup */
 .slider-controls {
     position: absolute;
     bottom: 40px;
@@ -195,11 +207,6 @@ a {
     color: var(--text-muted);
     font-size: 1.2rem;
     cursor: pointer;
-    transition: var(--transition-smooth);
-}
-
-.slider-controls button:hover {
-    color: var(--text-main);
 }
 
 .slide-indicators {
@@ -218,7 +225,7 @@ a {
     font-weight: bold;
 }
 
-/* --- MAIN GRID LAYOUTS --- */
+/* --- STRUCTURE HOUSING LAYOUT --- */
 .container {
     padding: 0 6%;
     margin-top: 60px;
@@ -243,7 +250,6 @@ a {
     letter-spacing: 1px;
 }
 
-/* Search within section */
 .search-bar {
     position: relative;
     width: 300px;
@@ -256,6 +262,7 @@ a {
     padding: 8px 15px;
     border-radius: 20px;
     color: #fff;
+    outline: none;
 }
 
 .search-bar i {
@@ -266,11 +273,15 @@ a {
     color: var(--text-muted);
 }
 
-/* Filtering Interface */
+/* Responsive Touch Scroller Container for Filters */
+.filter-tags-wrapper {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
 .filter-tags {
     display: flex;
     gap: 12px;
-    margin-bottom: 30px;
 }
 
 .filter-btn {
@@ -281,6 +292,7 @@ a {
     border-radius: 4px;
     cursor: pointer;
     transition: var(--transition-smooth);
+    white-space: nowrap;
 }
 
 .filter-btn:hover, .filter-btn.active {
@@ -289,14 +301,14 @@ a {
     border-color: var(--accent-red);
 }
 
-/* MEDIA GRID (FLEX/GRID MIX) */
-.media-grid {
+/* MEDIA & ON-DEMAND SHOWCASES GRIDS */
+.media-grid, .coming-soon-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 25px;
 }
 
-.media-card {
+.media-card, .upcoming-card {
     background: transparent;
     transition: var(--transition-smooth);
 }
@@ -322,7 +334,7 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.75);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -338,7 +350,7 @@ a {
     transform: scale(1.05);
 }
 
-.media-card h3 {
+.media-card h3, .upcoming-card h3 {
     font-size: 1rem;
     margin-bottom: 4px;
     white-space: nowrap;
@@ -346,14 +358,14 @@ a {
     text-overflow: ellipsis;
 }
 
-.media-card .meta {
+.media-card .meta, .upcoming-card .meta {
     color: var(--text-muted);
     font-size: 0.85rem;
 }
 
 .view-more-container {
     text-align: right;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .view-more {
@@ -361,10 +373,10 @@ a {
     font-weight: 500;
 }
 
-/* --- LIVE TV CHANNELS --- */
+/* --- BROADCAST LIVE TV CHANNELS --- */
 .channels-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px;
 }
 
@@ -409,23 +421,16 @@ a {
     height: 8px;
     background-color: #22c55e;
     border-radius: 50%;
-    display: inline-block;
-    animation: pulse 1.5s infinite;
+    animation: livePulse 1.5s infinite;
 }
 
-@keyframes pulse {
+@keyframes livePulse {
     0% { opacity: 0.4; }
     50% { opacity: 1; }
     100% { opacity: 0.4; }
 }
 
-/* --- COMING SOON --- */
-.coming-soon-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 25px;
-}
-
+/* --- COMING SOON BADGE ADDITION --- */
 .release-badge {
     position: absolute;
     bottom: 0;
@@ -439,7 +444,7 @@ a {
     font-weight: bold;
 }
 
-/* --- NEWS SECTION --- */
+/* --- BROADCAST COMPREHENSIVE NEWS MAGAZINE --- */
 .news-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -482,7 +487,7 @@ a {
     color: var(--accent-red);
 }
 
-/* --- FOOTER --- */
+/* --- FOOTER PLATFORM --- */
 footer {
     background: #040405;
     padding: 60px 6% 30px 6%;
@@ -546,4 +551,109 @@ footer {
 
 .footer-bottom a {
     color: var(--text-muted);
+}
+
+/* --- MOBILE RESPONSIVE ENGINE (MEDIA QUERIES) --- */
+
+@media (max-width: 1024px) {
+    .navbar { padding: 15px 4%; }
+    .container { padding: 0 4%; }
+    footer { padding: 40px 4% 20px 4%; }
+    .hero-title { font-size: 3.2rem; }
+    .news-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    /* Hamburger Activation */
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--text-main);
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 2000;
+    }
+
+    /* Sliding Left Canvas Drawer */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        height: 100vh;
+        background-color: #0a0a0d;
+        display: flex;
+        flex-direction: column;
+        padding: 100px 40px;
+        gap: 25px;
+        transition: var(--transition-smooth);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.7);
+        z-index: 1999;
+    }
+
+    .nav-links.open {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.2rem;
+        margin-right: 0;
+    }
+
+    .nav-right .btn-signin {
+        padding: 6px 14px;
+        font-size: 0.75rem;
+    }
+
+    /* Scaling Hero Layer */
+    .hero-slider { height: 75vh; }
+    .hero-title { font-size: 2.3rem; }
+    .hero-subtitle { font-size: 0.85rem; letter-spacing: 1px; }
+    .hero-actions { gap: 15px; }
+
+    /* Touch Swiping on Tag Filters */
+    .filter-tags-wrapper {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    .filter-tags-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Stacking Header Content */
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .search-bar { width: 100%; }
+
+    /* Rescaling Component Layout Grids */
+    .media-grid, .coming-soon-grid {
+        grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+        gap: 15px;
+    }
+
+    .channels-grid { grid-template-columns: 1fr; }
+
+    .news-card { flex-direction: column; }
+    .news-card img { width: 100%; height: 210px; }
+
+    /* Rearranging Footer Stacks */
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+    }
+    .footer-nav {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
