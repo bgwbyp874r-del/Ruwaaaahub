@@ -1,69 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Share Videos and Photos</title>
-<style>
-  body { font-family: Arial, sans-serif; margin: 20px; }
-  h1 { text-align: center; }
-  .upload-section { margin-bottom: 40px; }
-  label { display: block; margin-top: 10px; }
-  input[type="file"] { margin-top: 5px; }
-  button { margin-top: 10px; }
-  .shared-links { margin-top: 20px; }
-  .shared-item { margin-bottom: 10px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagix Cinema - Movies, TV Shows & Live Channels</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-<h1>Upload and Share Photos & Videos</h1>
+    <header class="navbar">
+        <div class="logo">
+            <img src="https://via.placeholder.com/150x40?text=IMAGIX+CINEMA" alt="Imagix Cinema Logo">
+        </div>
+        <nav class="nav-links">
+            <a href="#home" class="active">Home</a>
+            <a href="#movies">Movies</a>
+            <a href="#shows">TV Shows</a>
+            <a href="#channels">Live TV</a>
+            <a href="#news">News</a>
+        </nav>
+        <div class="nav-right">
+            <i class="fa-solid fa-magnifying-glass search-trigger"></i>
+            <a href="#" class="btn btn-primary btn-signin">Sign In</a>
+        </div>
+    </header>
 
-<div class="upload-section">
-  <h2>Upload Photo</h2>
-  <input type="file" id="photoInput" accept="image/*" />
-  <button onclick="shareFile('photo')">Share Photo</button>
-</div>
+    <section id="home" class="hero-slider">
+        <div class="slide active" style="background-image: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop');">
+            <div class="hero-content">
+                <h1 class="hero-title">VENOM</h1>
+                <p class="hero-subtitle">THE WORLD HAS ENOUGH SUPERHEROES</p>
+                <div class="hero-meta">
+                    <span class="tag">IMAX 3D</span>
+                    <span class="date">JANUARY 29, 2026</span>
+                </div>
+                <div class="hero-actions">
+                    <a href="https://example.com/book/venom" class="btn btn-danger">Book Now</a>
+                    <a href="https://www.youtube.com/watch?v=xyz" target="_blank" class="btn-watch-trailer">
+                        <i class="fa-solid fa-circle-play"></i> Watch Trailer
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <button class="prev-slide"><i class="fa-solid fa-arrow-left"></i></button>
+            <div class="slide-indicators">
+                <span class="indicator active" data-slide="0">01</span>
+                <span class="indicator" data-slide="1">02</span>
+                <span class="indicator" data-slide="2">03</span>
+            </div>
+            <button class="next-slide"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </section>
 
-<div class="upload-section">
-  <h2>Upload Video</h2>
-  <input type="file" id="videoInput" accept="video/*" />
-  <button onclick="shareFile('video')">Share Video</button>
-</div>
+    <main class="container">
 
-<div class="shared-links">
-  <h2>Shared Files</h2>
-  <div id="sharedPhotos"></div>
-  <div id="sharedVideos"></div>
-</div>
+        <section id="movies" class="content-section">
+            <div class="section-header">
+                <h2>Opening This Week</h2>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search movies or shows...">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
 
-<script>
-  function shareFile(type) {
-    const inputId = type === 'photo' ? 'photoInput' : 'videoInput';
-    const displayId = type === 'photo' ? 'sharedPhotos' : 'sharedVideos';
-    const input = document.getElementById(inputId);
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const url = e.target.result;
-        const link = document.createElement('a');
-        link.href = url;
-        link.textContent = `View ${type}: ${file.name}`;
-        link.target = '_blank';
+            <div class="filter-tags">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="movie">Movies</button>
+                <button class="filter-btn" data-filter="show">TV Shows</button>
+                <button class="filter-btn" data-filter="imax">IMAX 3D</button>
+            </div>
 
-        const container = document.createElement('div');
-        container.className = 'shared-item';
-        container.appendChild(link);
+            <div class="media-grid">
+                <div class="media-card" data-category="movie imax">
+                    <div class="poster-wrapper">
+                        <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=500&auto=format&fit=crop" alt="Venom">
+                        <div class="poster-overlay">
+                            <a href="https://example.com/details/venom" class="btn btn-sm">Details</a>
+                        </div>
+                    </div>
+                    <h3>Venom</h3>
+                    <p class="meta">120 min | Action</p>
+                </div>
 
-        document.getElementById(displayId).appendChild(container);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      alert('Please select a file to share.');
-    }
-  }
-</script>
+                <div class="media-card" data-category="show">
+                    <div class="poster-wrapper">
+                        <img src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?q=80&w=500&auto=format&fit=crop" alt="The Last Kingdom">
+                        <div class="poster-overlay">
+                            <a href="https://example.com/details/last-kingdom" class="btn btn-sm">Watch S1</a>
+                        </div>
+                    </div>
+                    <h3>The Chronicles</h3>
+                    <p class="meta">Season 3 | Drama, Fantasy</p>
+                </div>
 
+                <div class="media-card" data-category="movie">
+                    <div class="poster-wrapper">
+                        <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=500&auto=format&fit=crop" alt="Dunkirk">
+                        <div class="poster-overlay">
+                            <a href="https://example.com/details/dunkirk" class="btn btn-sm">Details</a>
+                        </div>
+                    </div>
+                    <h3>Dunkirk</h3>
+                    <p class="meta">106 min | History, War</p>
+                </div>
+
+                <div class="media-card" data-category="movie">
+                    <div class="poster-wrapper">
+                        <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?q=80&w=500&auto=format&fit=crop" alt="Cyberpunk">
+                        <div class="poster-overlay">
+                            <a href="https://example.com/details/cyber" class="btn btn-sm">Details</a>
+                        </div>
+                    </div>
+                    <h3>Neon Horizon</h3>
+                    <p class="meta">135 min | Sci-Fi</p>
+                </div>
+            </div>
+            <div class="view-more-container">
+                <a href="https://example.com/catalog" class="view-more">More...</a>
+            </div>
+        </section>
+
+        <section id="channels" class="content-section">
+            <div class="section-header">
+                <h2>Live TV Channels</h2>
+            </div>
+            <div class="channels-grid">
+                <a href="https://example.com/live/hbo" class="channel-card">
+                    <div class="channel-logo">
+                        <i class="fa-solid fa-tv"></i>
+                        <span>HBO Live</span>
+                    </div>
+                    <div class="channel-status"><span class="live-dot"></span> NOW PLAYING: House of the Dragon</div>
+                </a>
+                <a href="https://example.com/live/sports" class="channel-card">
+                    <div class="channel-logo">
+                        <i class="fa-solid fa-circle-play"></i>
+                        <span>Sky Sports</span>
+                    </div>
+                    <div class="channel-status"><span class="live-dot"></span> Live Match Premier League</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Coming Soon</h2>
+            </div>
+            <div class="coming-soon-grid">
+                <div class="upcoming-card">
+                    <div class="poster-wrapper">
+                        <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=500&auto=format&fit=crop" alt="Justice League">
+                        <div class="release-badge"><i class="fa-regular fa-calendar"></i> APRIL 18</div>
+                    </div>
+                    <h3>Justice League</h3>
+                    <p class="meta">145 min | Action, Sci-Fi</p>
+                </div>
+                <div class="upcoming-card">
+                    <div class="poster-wrapper">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=500&auto=format&fit=crop" alt="Warcraft">
+                        <div class="release-badge"><i class="fa-regular fa-calendar"></i> MAY 22</div>
+                    </div>
+                    <h3>Warcraft: Origins</h3>
+                    <p class="meta">123 min | Fantasy</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="news" class="content-section">
+            <div class="section-header">
+                <h2>News</h2>
+            </div>
+            <div class="news-grid">
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=500&auto=format&fit=crop" alt="News 1">
+                    <div class="news-info">
+                        <h3>We are waiting for your reviews for new winter films</h3>
+                        <a href="https://example.com/news/1" class="read-more">Read article</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=500&auto=format&fit=crop" alt="News 2">
+                    <div class="news-info">
+                        <h3>Review of files in 3D format, becoming more acceptable</h3>
+                        <a href="https://example.com/news/2" class="read-more">Read article</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-branding">
+                <img src="https://via.placeholder.com/150x40?text=IMAGIX+CINEMA" alt="Imagix Cinema Logo" class="footer-logo">
+            </div>
+            <ul class="footer-nav">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#movies">Schedule</a></li>
+                <li><a href="#shows">Movies</a></li>
+                <li><a href="#news">News</a></li>
+            </ul>
+            <div class="footer-socials">
+                <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Contact: <a href="mailto:info@imagixcinema.com">info@imagixcinema.com</a> | +38 (099) 01 01 001</p>
+            <p class="copyright">&copy; 2026 Imagix Cinema. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
