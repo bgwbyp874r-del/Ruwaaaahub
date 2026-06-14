@@ -13,21 +13,27 @@
         <div class="logo">
             <img src="https://via.placeholder.com/150x40?text=IMAGIX+CINEMA" alt="Imagix Cinema Logo">
         </div>
-        <nav class="nav-links">
+        
+        <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav class="nav-links" id="nav-menu">
             <a href="#home" class="active">Home</a>
             <a href="#movies">Movies</a>
             <a href="#shows">TV Shows</a>
             <a href="#channels">Live TV</a>
             <a href="#news">News</a>
         </nav>
+        
         <div class="nav-right">
             <i class="fa-solid fa-magnifying-glass search-trigger"></i>
-            <a href="#" class="btn btn-primary btn-signin">Sign In</a>
+            <a href="https://example.com/login" class="btn btn-primary btn-signin">Sign In</a>
         </div>
     </header>
 
     <section id="home" class="hero-slider">
-        <div class="slide active" style="background-image: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop');">
+        <div class="slide active" style="background-image: linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop');">
             <div class="hero-content">
                 <h1 class="hero-title">VENOM</h1>
                 <p class="hero-subtitle">THE WORLD HAS ENOUGH SUPERHEROES</p>
@@ -43,6 +49,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="slider-controls">
             <button class="prev-slide"><i class="fa-solid fa-arrow-left"></i></button>
             <div class="slide-indicators">
@@ -60,16 +67,18 @@
             <div class="section-header">
                 <h2>Opening This Week</h2>
                 <div class="search-bar">
-                    <input type="text" placeholder="Search movies or shows...">
+                    <input type="text" placeholder="Search titles...">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
 
-            <div class="filter-tags">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="movie">Movies</button>
-                <button class="filter-btn" data-filter="show">TV Shows</button>
-                <button class="filter-btn" data-filter="imax">IMAX 3D</button>
+            <div class="filter-tags-wrapper">
+                <div class="filter-tags">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="movie">Movies</button>
+                    <button class="filter-btn" data-filter="show">TV Shows</button>
+                    <button class="filter-btn" data-filter="imax">IMAX 3D</button>
+                </div>
             </div>
 
             <div class="media-grid">
@@ -86,9 +95,9 @@
 
                 <div class="media-card" data-category="show">
                     <div class="poster-wrapper">
-                        <img src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?q=80&w=500&auto=format&fit=crop" alt="The Last Kingdom">
+                        <img src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?q=80&w=500&auto=format&fit=crop" alt="The Chronicles">
                         <div class="poster-overlay">
-                            <a href="https://example.com/details/last-kingdom" class="btn btn-sm">Watch S1</a>
+                            <a href="https://example.com/details/the-chronicles" class="btn btn-sm">Watch S1</a>
                         </div>
                     </div>
                     <h3>The Chronicles</h3>
@@ -108,17 +117,18 @@
 
                 <div class="media-card" data-category="movie">
                     <div class="poster-wrapper">
-                        <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?q=80&w=500&auto=format&fit=crop" alt="Cyberpunk">
+                        <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?q=80&w=500&auto=format&fit=crop" alt="Neon Horizon">
                         <div class="poster-overlay">
-                            <a href="https://example.com/details/cyber" class="btn btn-sm">Details</a>
+                            <a href="https://example.com/details/neon-horizon" class="btn btn-sm">Details</a>
                         </div>
                     </div>
                     <h3>Neon Horizon</h3>
                     <p class="meta">135 min | Sci-Fi</p>
                 </div>
             </div>
+            
             <div class="view-more-container">
-                <a href="https://example.com/catalog" class="view-more">More...</a>
+                <a href="https://example.com/catalog" class="view-more">More View...</a>
             </div>
         </section>
 
@@ -155,7 +165,7 @@
                         <div class="release-badge"><i class="fa-regular fa-calendar"></i> APRIL 18</div>
                     </div>
                     <h3>Justice League</h3>
-                    <p class="meta">145 min | Action, Sci-Fi</p>
+                    <p class="meta">145 min | Action</p>
                 </div>
                 <div class="upcoming-card">
                     <div class="poster-wrapper">
@@ -174,14 +184,14 @@
             </div>
             <div class="news-grid">
                 <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=500&auto=format&fit=crop" alt="News 1">
+                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=500&auto=format&fit=crop" alt="News Article 1">
                     <div class="news-info">
                         <h3>We are waiting for your reviews for new winter films</h3>
                         <a href="https://example.com/news/1" class="read-more">Read article</a>
                     </div>
                 </article>
                 <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=500&auto=format&fit=crop" alt="News 2">
+                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=500&auto=format&fit=crop" alt="News Article 2">
                     <div class="news-info">
                         <h3>Review of files in 3D format, becoming more acceptable</h3>
                         <a href="https://example.com/news/2" class="read-more">Read article</a>
@@ -204,9 +214,9 @@
                 <li><a href="#news">News</a></li>
             </ul>
             <div class="footer-socials">
-                <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             </div>
         </div>
         <div class="footer-bottom">
