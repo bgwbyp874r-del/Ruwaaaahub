@@ -4,227 +4,355 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imagix Cinema - Movies, TV Shows & Live Channels</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.95) !important;
+            border-bottom: 1px solid #222;
+        }
+        .nav-link {
+            color: #bbb !important;
+            transition: color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #dc3545 !important;
+        }
+        .hero-slide {
+            height: 70vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.4));
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .card {
+            background-color: #1c1c1c;
+            border: 1px solid #2c2c2c;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(220, 53, 69, 0.2);
+        }
+        .poster-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+        .poster-wrapper img {
+            transition: transform 0.3s ease;
+            height: 350px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .card:hover .poster-wrapper img {
+            transform: scale(1.05);
+        }
+        .poster-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+        .poster-wrapper:hover .poster-overlay {
+            opacity: 1;
+        }
+        .live-dot {
+            height: 10px;
+            width: 10px;
+            background-color: #28a745;
+            border-radius: 50%;
+            display: inline-block;
+            animation: blink 1.5s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+        footer {
+            background-color: #0b0b0b;
+            border-top: 1px solid #222;
+        }
+        footer a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #dc3545;
+        }
+    </style>
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="logo">
-            <img src="https://via.placeholder.com/150x40?text=IMAGIX+CINEMA" alt="Imagix Cinema Logo">
-        </div>
-        
-        <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle Navigation">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+    <header class="navbar navbar-expand-lg navbar-dark sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <img src="https://via.placeholder.com/150x40?text=IMAGIX+CINEMA" alt="Imagix Cinema Logo">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <nav class="nav-links" id="nav-menu">
-            <a href="#home" class="active">Home</a>
-            <a href="#movies">Movies</a>
-            <a href="#shows">TV Shows</a>
-            <a href="#channels">Live TV</a>
-            <a href="#news">News</a>
-        </nav>
-        
-        <div class="nav-right">
-            <i class="fa-solid fa-magnifying-glass search-trigger"></i>
-            <a href="https://example.com/login" class="btn btn-primary btn-signin">Sign In</a>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-2">
+                    <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a href="#movies" class="nav-link">Movies</a></li>
+                    <li class="nav-item"><a href="#shows" class="nav-link">TV Shows</a></li>
+                    <li class="nav-item"><a href="#channels" class="nav-link">Live TV</a></li>
+                    <li class="nav-item"><a href="#news" class="nav-link">News</a></li>
+                </ul>
+                
+                <div class="d-flex align-items-center gap-3">
+                    <i class="fa-solid fa-magnifying-glass text-light fs-5 cursor-pointer" style="cursor: pointer;"></i>
+                    <a href="https://example.com/login" class="btn btn-danger px-4 rounded-pill">Sign In</a>
+                </div>
+            </div>
         </div>
     </header>
 
-    <section id="home" class="hero-slider">
-        <div class="slide active" style="background-image: linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop');">
-            <div class="hero-content">
-                <h1 class="hero-title">VENOM</h1>
-                <p class="hero-subtitle">THE WORLD HAS ENOUGH SUPERHEROES</p>
-                <div class="hero-meta">
-                    <span class="tag">IMAX 3D</span>
-                    <span class="date">JANUARY 29, 2026</span>
-                </div>
-                <div class="hero-actions">
-                    <a href="https://example.com/book/venom" class="btn btn-danger">Book Now</a>
-                    <a href="https://www.youtube.com/watch?v=xyz" target="_blank" class="btn-watch-trailer">
-                        <i class="fa-solid fa-circle-play"></i> Watch Trailer
-                    </a>
+    <section id="home" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop');">
+                    <div class="hero-overlay">
+                        <div class="container">
+                            <div class="col-lg-6">
+                                <span class="badge bg-danger mb-2 px-3 py-2 fs-6">IMAX 3D</span>
+                                <h1 class="display-3 fw-bold text-uppercase mb-2">VENOM</h1>
+                                <p class="lead text-muted mb-4">THE WORLD HAS ENOUGH SUPERHEROES</p>
+                                <div class="d-flex gap-3 align-items-center">
+                                    <a href="https://example.com/book/venom" class="btn btn-danger btn-lg px-4 rounded-pill fw-bold">Book Now</a>
+                                    <a href="https://www.youtube.com/watch?v=xyz" target="_blank" class="text-white text-decoration-none fs-5 ms-2 hover-red">
+                                        <i class="fa-solid fa-circle-play text-danger me-2 fs-4"></i> Watch Trailer
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="slider-controls">
-            <button class="prev-slide"><i class="fa-solid fa-arrow-left"></i></button>
-            <div class="slide-indicators">
-                <span class="indicator active" data-slide="0">01</span>
-                <span class="indicator" data-slide="1">02</span>
-                <span class="indicator" data-slide="2">03</span>
             </div>
-            <button class="next-slide"><i class="fa-solid fa-arrow-right"></i></button>
-        </div>
     </section>
 
-    <main class="container">
+    <main class="container my-5">
 
-        <section id="movies" class="content-section">
-            <div class="section-header">
-                <h2>Opening This Week</h2>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search titles...">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+        <section id="movies" class="mb-5">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                <h2 class="fw-bold border-start border-danger border-4 ps-3">Opening This Week</h2>
+                <div class="input-group style-search" style="max-width: 300px;">
+                    <input type="text" class="form-control bg-dark text-white border-secondary" placeholder="Search titles...">
+                    <button class="btn btn-danger" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
             </div>
 
-            <div class="filter-tags-wrapper">
-                <div class="filter-tags">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="movie">Movies</button>
-                    <button class="filter-btn" data-filter="show">TV Shows</button>
-                    <button class="filter-btn" data-filter="imax">IMAX 3D</button>
+            <div class="mb-4">
+                <div class="btn-group" role="group" aria-label="Filter tags">
+                    <button type="button" class="btn btn-outline-danger active">All</button>
+                    <button type="button" class="btn btn-outline-danger">Movies</button>
+                    <button type="button" class="btn btn-outline-danger">TV Shows</button>
+                    <button type="button" class="btn btn-outline-danger">IMAX 3D</button>
                 </div>
             </div>
 
-            <div class="media-grid">
-                <div class="media-card" data-category="movie imax">
-                    <div class="poster-wrapper">
-                        <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=500&auto=format&fit=crop" alt="Venom">
-                        <div class="poster-overlay">
-                            <a href="https://example.com/details/venom" class="btn btn-sm">Details</a>
+            <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="poster-wrapper">
+                            <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=500&auto=format&fit=crop" alt="Venom">
+                            <div class="poster-overlay">
+                                <a href="https://example.com/details/venom" class="btn btn-danger rounded-pill px-4">Details</a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-truncate">Venom</h5>
+                            <p class="card-text text-muted small">120 min | Action</p>
                         </div>
                     </div>
-                    <h3>Venom</h3>
-                    <p class="meta">120 min | Action</p>
                 </div>
-
-                <div class="media-card" data-category="show">
-                    <div class="poster-wrapper">
-                        <img src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?q=80&w=500&auto=format&fit=crop" alt="The Chronicles">
-                        <div class="poster-overlay">
-                            <a href="https://example.com/details/the-chronicles" class="btn btn-sm">Watch S1</a>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="poster-wrapper">
+                            <img src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?q=80&w=500&auto=format&fit=crop" alt="The Chronicles">
+                            <div class="poster-overlay">
+                                <a href="https://example.com/details/the-chronicles" class="btn btn-danger rounded-pill px-4">Watch S1</a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-truncate">The Chronicles</h5>
+                            <p class="card-text text-muted small">Season 3 | Drama</p>
                         </div>
                     </div>
-                    <h3>The Chronicles</h3>
-                    <p class="meta">Season 3 | Drama, Fantasy</p>
                 </div>
-
-                <div class="media-card" data-category="movie">
-                    <div class="poster-wrapper">
-                        <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=500&auto=format&fit=crop" alt="Dunkirk">
-                        <div class="poster-overlay">
-                            <a href="https://example.com/details/dunkirk" class="btn btn-sm">Details</a>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="poster-wrapper">
+                            <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=500&auto=format&fit=crop" alt="Dunkirk">
+                            <div class="poster-overlay">
+                                <a href="https://example.com/details/dunkirk" class="btn btn-danger rounded-pill px-4">Details</a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-truncate">Dunkirk</h5>
+                            <p class="card-text text-muted small">106 min | History, War</p>
                         </div>
                     </div>
-                    <h3>Dunkirk</h3>
-                    <p class="meta">106 min | History, War</p>
                 </div>
-
-                <div class="media-card" data-category="movie">
-                    <div class="poster-wrapper">
-                        <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?q=80&w=500&auto=format&fit=crop" alt="Neon Horizon">
-                        <div class="poster-overlay">
-                            <a href="https://example.com/details/neon-horizon" class="btn btn-sm">Details</a>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="poster-wrapper">
+                            <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?q=80&w=500&auto=format&fit=crop" alt="Neon Horizon">
+                            <div class="poster-overlay">
+                                <a href="https://example.com/details/neon-horizon" class="btn btn-danger rounded-pill px-4">Details</a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-truncate">Neon Horizon</h5>
+                            <p class="card-text text-muted small">135 min | Sci-Fi</p>
                         </div>
                     </div>
-                    <h3>Neon Horizon</h3>
-                    <p class="meta">135 min | Sci-Fi</p>
                 </div>
             </div>
             
-            <div class="view-more-container">
-                <a href="https://example.com/catalog" class="view-more">More View...</a>
+            <div class="text-center mt-4">
+                <a href="https://example.com/catalog" class="btn btn-outline-light px-4 rounded-pill">More View...</a>
             </div>
         </section>
 
-        <section id="channels" class="content-section">
-            <div class="section-header">
-                <h2>Live TV Channels</h2>
-            </div>
-            <div class="channels-grid">
-                <a href="https://example.com/live/hbo" class="channel-card">
-                    <div class="channel-logo">
-                        <i class="fa-solid fa-tv"></i>
-                        <span>HBO Live</span>
-                    </div>
-                    <div class="channel-status"><span class="live-dot"></span> NOW PLAYING: House of the Dragon</div>
-                </a>
-                <a href="https://example.com/live/sports" class="channel-card">
-                    <div class="channel-logo">
-                        <i class="fa-solid fa-circle-play"></i>
-                        <span>Sky Sports</span>
-                    </div>
-                    <div class="channel-status"><span class="live-dot"></span> Live Match Premier League</div>
-                </a>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <div class="section-header">
-                <h2>Coming Soon</h2>
-            </div>
-            <div class="coming-soon-grid">
-                <div class="upcoming-card">
-                    <div class="poster-wrapper">
-                        <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=500&auto=format&fit=crop" alt="Justice League">
-                        <div class="release-badge"><i class="fa-regular fa-calendar"></i> APRIL 18</div>
-                    </div>
-                    <h3>Justice League</h3>
-                    <p class="meta">145 min | Action</p>
+        <section id="channels" class="mb-5">
+            <h2 class="fw-bold border-start border-danger border-4 ps-3 mb-4">Live TV Channels</h2>
+            <div class="row g-3 row-cols-1 row-cols-md-2">
+                <div class="col">
+                    <a href="https://example.com/live/hbo" class="card text-decoration-none text-white p-3 h-100 d-flex flex-row align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="fa-solid fa-tv text-danger fs-3"></i>
+                            <div>
+                                <h5 class="mb-0 fw-bold">HBO Live</h5>
+                                <small class="text-muted"><span class="live-dot me-1"></span> NOW PLAYING: House of the Dragon</small>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-muted"></i>
+                    </a>
                 </div>
-                <div class="upcoming-card">
-                    <div class="poster-wrapper">
-                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=500&auto=format&fit=crop" alt="Warcraft">
-                        <div class="release-badge"><i class="fa-regular fa-calendar"></i> MAY 22</div>
-                    </div>
-                    <h3>Warcraft: Origins</h3>
-                    <p class="meta">123 min | Fantasy</p>
+                <div class="col">
+                    <a href="https://example.com/live/sports" class="card text-decoration-none text-white p-3 h-100 d-flex flex-row align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="fa-solid fa-circle-play text-danger fs-3"></i>
+                            <div>
+                                <h5 class="mb-0 fw-bold">Sky Sports</h5>
+                                <small class="text-muted"><span class="live-dot me-1"></span> Live Match Premier League</small>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-muted"></i>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section id="news" class="content-section">
-            <div class="section-header">
-                <h2>News</h2>
+        <section class="mb-5">
+            <h2 class="fw-bold border-start border-danger border-4 ps-3 mb-4">Coming Soon</h2>
+            <div class="row g-4 row-cols-1 row-cols-md-2">
+                <div class="col">
+                    <div class="card text-white">
+                        <div class="poster-wrapper">
+                            <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=500&auto=format&fit=crop" style="height: 250px;" alt="Justice League">
+                            <span class="position-absolute top-0 start-0 m-3 badge bg-danger p-2"><i class="fa-regular fa-calendar me-1"></i> APRIL 18</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="fw-bold">Justice League</h5>
+                            <p class="text-muted small mb-0">145 min | Action</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-white">
+                        <div class="poster-wrapper">
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=500&auto=format&fit=crop" style="height: 250px;" alt="Warcraft">
+                            <span class="position-absolute top-0 start-0 m-3 badge bg-danger p-2"><i class="fa-regular fa-calendar me-1"></i> MAY 22</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="fw-bold">Warcraft: Origins</h5>
+                            <p class="text-muted small mb-0">123 min | Fantasy</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="news-grid">
-                <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=500&auto=format&fit=crop" alt="News Article 1">
-                    <div class="news-info">
-                        <h3>We are waiting for your reviews for new winter films</h3>
-                        <a href="https://example.com/news/1" class="read-more">Read article</a>
-                    </div>
-                </article>
-                <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=500&auto=format&fit=crop" alt="News Article 2">
-                    <div class="news-info">
-                        <h3>Review of files in 3D format, becoming more acceptable</h3>
-                        <a href="https://example.com/news/2" class="read-more">Read article</a>
-                    </div>
-                </article>
+        </section>
+
+        <section id="news" class="mb-5">
+            <h2 class="fw-bold border-start border-danger border-4 ps-3 mb-4">News</h2>
+            <div class="row g-4 row-cols-1 row-cols-md-2">
+                <div class="col">
+                    <article class="card h-100 flex-row align-items-center p-2">
+                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=500&auto=format&fit=crop" class="rounded" style="width: 120px; height: 120px; object-fit: cover;" alt="News Article 1">
+                        <div class="card-body">
+                            <h6 class="fw-bold">We are waiting for your reviews for new winter films</h6>
+                            <a href="https://example.com/news/1" class="btn btn-sm btn-link text-danger p-0 mt-2 text-decoration-none">Read article <i class="fa-solid fa-arrow-right small"></i></a>
+                        </div>
+                    </article>
+                </div>
+                <div class="col">
+                    <article class="card h-100 flex-row align-items-center p-2">
+                        <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=500&auto=format&fit=crop" class="rounded" style="width: 120px; height: 120px; object-fit: cover;" alt="News Article 2">
+                        <div class="card-body">
+                            <h6 class="fw-bold">Review of files in 3D format, becoming more acceptable</h6>
+                            <a href="https://example.com/news/2" class="btn btn-sm btn-link text-danger p-0 mt-2 text-decoration-none">Read article <i class="fa-solid fa-arrow-right small"></i></a>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-branding">
-                <img src="https://via.placeholder.com/150x40?text=IMAGIX+CINEMA" alt="Imagix Cinema Logo" class="footer-logo">
+    <footer class="py-5 text-center text-md-start">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-4 text-center text-md-start">
+                    <img src="https://via.placeholder.com/150x40?text=IMAGIX+CINEMA" alt="Imagix Cinema Logo" class="mb-3">
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline mb-0 text-center">
+                        <li class="list-inline-item mx-2"><a href="#home">Home</a></li>
+                        <li class="list-inline-item mx-2"><a href="#movies">Schedule</a></li>
+                        <li class="list-inline-item mx-2"><a href="#shows">Movies</a></li>
+                        <li class="list-inline-item mx-2"><a href="#news">News</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <a href="https://facebook.com" target="_blank" class="text-white mx-2 fs-5"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="text-white mx-2 fs-5"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="text-white mx-2 fs-5"><i class="fa-brands fa-instagram"></i></a>
+                </div>
             </div>
-            <ul class="footer-nav">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#movies">Schedule</a></li>
-                <li><a href="#shows">Movies</a></li>
-                <li><a href="#news">News</a></li>
-            </ul>
-            <div class="footer-socials">
-                <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://twitter.com" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <hr class="border-secondary my-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 small text-muted">
+                <p class="mb-0">Contact: <a href="mailto:info@imagixcinema.com" class="text-danger">info@imagixcinema.com</a> | +38 (099) 01 01 001</p>
+                <p class="mb-0">&copy; 2026 Imagix Cinema. All rights reserved.</p>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>Contact: <a href="mailto:info@imagixcinema.com">info@imagixcinema.com</a> | +38 (099) 01 01 001</p>
-            <p class="copyright">&copy; 2026 Imagix Cinema. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
